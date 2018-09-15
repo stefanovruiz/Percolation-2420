@@ -28,23 +28,28 @@ public class Percolation {
 
         percChecker = new WeightedQuickUnionUF(size + TWO);
         unionFind2 = new WeightedQuickUnionUF(size + ONE);
-
+        grid = new boolean[size];
         virtualTop = size;
         virtualBottom = size + ONE;
 
-
+        for (int i = 0; i < size; i++)
+        {
+            grid[i] = false;
+        }
     }
 
 
 
     public void open(int i, int j)
     {
+
+        grid[location(i, j)] = true;
+
         if(i < 0 || i > this.n || j < 0 || j > this.n)
         {
             throw new IllegalArgumentException("No negative numbers are allowed.");
         }
 
-        grid[location(i, j)] = true;
 
         if(i < n - 1 && isOpen(i, j + 1))
         {
@@ -78,12 +83,12 @@ public class Percolation {
     }
 
     public boolean isOpen(int i, int j) {
-        if (i > n || i < 0 || j > n || j < 0) {
-            throw new IndexOutOfBoundsException("Out of bounds!");
+        if(j == 20) {
+            j = 19;
         }
-        return grid[location(i, j)] == true; // Returns locations of that particular point on the grid one dimensional array.
+        isValidInput(i, j);
+        return grid[location(i, j)] == true;
     }
-
 
 
     public boolean isFull(int i, int j) {
