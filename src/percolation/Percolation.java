@@ -83,8 +83,8 @@ public class Percolation {
     }
 
     public boolean isOpen(int i, int j) {
-        if(j == 20) {
-            j = 19;
+        if(j == n) {
+            j = n - 1;
         }
         isValidInput(i, j);
         return grid[location(i, j)] == true;
