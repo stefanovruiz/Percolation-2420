@@ -30,28 +30,48 @@ public class PercolationStats {
         }
     }
 
+    /***
+     * Gets the mean of percolation threshold
+     *
+     * @return
+     */
     public double mean()
     {
         return StdStats.mean(ratioOfOpenSites);
     }
 
+    /***
+     * Gets the standard deviation of percolation threshold
+     *
+     * @return
+     */
     public double stddev()
     {
         return StdStats.stddev(ratioOfOpenSites);
     }
 
+    /**
+     * Gets the low  end endpoint of 95% confidence interval
+     *
+     * @return
+     */
     public double confidenceLow()
     {
         return (mean() - ((1.96 * stddev()) / Math.sqrt(experimentsTotal)));
     }
 
+    /***
+     * Gets the high end point of 95% confidence interval
+     *
+     * @return
+     */
     public double confidenceHigh()
     {
        return (mean() + ((1.96 * stddev()) / Math.sqrt(experimentsTotal)));
     }
 
     public static void main(String[] args) {
-        PercolationStats percolationStats = new PercolationStats(200, 1000);
+        PercolationStats percolationStats = new PercolationStats(200, 100);
         StdOut.println("Mean: " + percolationStats.mean());
         StdOut.println("Standard Deviation: " + percolationStats.stddev());
         StdOut.println("Confidence Low: " + percolationStats.confidenceLow());

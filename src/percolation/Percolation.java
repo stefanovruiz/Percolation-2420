@@ -15,8 +15,6 @@ public class Percolation {
     WeightedQuickUnionUF percChecker;
     WeightedQuickUnionUF unionFind2;
 
-//n * i + j
-
     public Percolation(int N) {
         if (N < 0) {
             throw new IllegalArgumentException("NO NEGATIVE NUMBERS ARE ALLOWED");
@@ -39,7 +37,11 @@ public class Percolation {
     }
 
 
-
+    /***
+     * Open's site (row i, column j) if it is not open already
+     * @param i
+     * @param j
+     * */
     public void open(int i, int j)
     {
 
@@ -82,6 +84,13 @@ public class Percolation {
         }
     }
 
+    /**
+     * Checks to see if the site is open (row i, column j) open
+     *
+     * @param i
+     * @param j
+     * @return
+     */
     public boolean isOpen(int i, int j) {
         if(j == n) {
             j = n - 1;
@@ -90,7 +99,13 @@ public class Percolation {
         return grid[location(i, j)] == true;
     }
 
-
+    /***
+     * Checks if sites are full
+     *
+     * @param i
+     * @param j
+     * @return returns connected locations
+     */
     public boolean isFull(int i, int j) {
         isValidInput(i, j);
         return unionFind2.connected(location(i, j), virtualTop);
@@ -148,6 +163,13 @@ public class Percolation {
         return Integer.toString(count);
     }
 
+
+    /***
+     * Checks if the given in put is valid
+     *
+     * @param i
+     * @param j
+     */
     private void isValidInput(int i, int j) {
         if (i < 0 || i > (n - 1))
             throw new IndexOutOfBoundsException("row index i = " + i + " must be between 0 and " + (n - 1));
